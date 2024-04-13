@@ -29,6 +29,7 @@ const PostCard = ({ post, visitUserPage }: any) => {
     }
   };
 
+
   return (
     <Card className="bg-white shadow-lg rounded-lg p-4 my-4">
       <Title className="text-xl font-bold text-gray-800">{post.title}</Title>

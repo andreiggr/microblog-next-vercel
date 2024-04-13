@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "NEXT_PUBLIC_BASE_URL=http://13.40.200.183 NEXTAUTH_URL=http://localhost:3000/ NEXTAUTH_SECRET=super-auth-secret next start",
     "lint": "next lint"
   },
   "dependencies": {
