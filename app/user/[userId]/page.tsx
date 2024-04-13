@@ -67,7 +67,7 @@ const UserPostsPage = () => {
   return (
     <div>
       <Title>Posts by User: {userIdFromPath}</Title>
-      {isSessionUserPage && <CreatePost session={session}/>}
+      {isSessionUserPage && <CreatePost session={session} />}
       {posts ? (
         <PostsListing
           data={posts}

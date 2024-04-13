@@ -16,7 +16,7 @@ const PostsListing = ({
   data,
   changePage,
   page,
-  pageSize
+  pageSize,
 }: PostsListingProps) => {
   const router = useRouter();
 
