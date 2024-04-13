@@ -1,21 +1,25 @@
 'use client';
 import { Card, Title, Button } from '@tremor/react';
 import { signIn, useSession } from 'next-auth/react';
+import Posts from './posts';
 
 const Main = () => {
-  const { data: session } = useSession()
-  
+  const { data: session } = useSession();
+
   const handleLogin = () => {
     signIn();
   };
   return (
     <>
-      <Title>Hello</Title>
       {session ? (
-        <Card className="mt-6">
-          {/* <Posts /> */}
-          will be posts listing
-        </Card>
+        <>
+          <Title>
+            Hello <strong>{session.user?.name}</strong>
+          </Title>
+          <Card className="mt-6">
+            <Posts />
+          </Card>
+        </>
       ) : (
         <Card className="mt-6">
           <Button onClick={handleLogin}>Login to see posts</Button>
