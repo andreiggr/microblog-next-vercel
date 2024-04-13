@@ -1,5 +1,6 @@
 'use client';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { useRouter } from 'next/navigation';
 import * as Yup from 'yup';
 
 const userSchema = Yup.object({
@@ -27,6 +28,7 @@ export interface ApiError {
 }
 
 const CreateUser = () => {
+  const router = useRouter();
   const handleSubmit = async (
     values: any,
     { setSubmitting, resetForm, setErrors }: any
@@ -54,6 +56,7 @@ const CreateUser = () => {
           }
         }
       } else {
+        router.push('/');
         resetForm();
       }
     } catch (error) {
@@ -64,7 +67,7 @@ const CreateUser = () => {
 
   return (
     <>
-      <h1>Create User</h1>
+      <h1 className="text-2xl font-bold text-center my-4">Create User</h1>
       <Formik
         initialValues={{
           firstName: '',
@@ -76,24 +79,76 @@ const CreateUser = () => {
         onSubmit={handleSubmit}
       >
         {({ isSubmitting }) => (
-          <Form>
-            <Field type="text" name="firstName" placeholder="First Name" />
-            <ErrorMessage name="firstName" component="div" />
+          <Form className="max-w-lg mx-auto bg-white p-8 border border-gray-300 rounded-lg shadow-lg">
+            <div className="mb-4">
+              <Field
+                type="text"
+                name="firstName"
+                placeholder="First Name"
+                className="form-input mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              />
+              <ErrorMessage
+                name="firstName"
+                component="div"
+                className="text-red-500 text-sm mt-1"
+              />
+            </div>
 
-            <Field type="text" name="lastName" placeholder="Last Name" />
-            <ErrorMessage name="lastName" component="div" />
+            <div className="mb-4">
+              <Field
+                type="text"
+                name="lastName"
+                placeholder="Last Name"
+                className="form-input mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              />
+              <ErrorMessage
+                name="lastName"
+                component="div"
+                className="text-red-500 text-sm mt-1"
+              />
+            </div>
 
-            <Field type="text" name="username" placeholder="Username" />
-            <ErrorMessage name="username" component="div" />
+            <div className="mb-4">
+              <Field
+                type="text"
+                name="username"
+                placeholder="Username"
+                className="form-input mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              />
+              <ErrorMessage
+                name="username"
+                component="div"
+                className="text-red-500 text-sm mt-1"
+              />
+            </div>
 
-            <Field type="password" name="password" placeholder="Password" />
-            <ErrorMessage name="password" component="div" />
+            <div className="mb-6">
+              <Field
+                type="password"
+                name="password"
+                placeholder="Password"
+                className="form-input mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              />
+              <ErrorMessage
+                name="password"
+                component="div"
+                className="text-red-500 text-sm mt-1"
+              />
+            </div>
 
-            <button type="submit" disabled={isSubmitting}>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:opacity-50"
+            >
               Submit
             </button>
 
-            <ErrorMessage name="submit" component="div" className="error" />
+            <ErrorMessage
+              name="submit"
+              component="div"
+              className="text-red-500 text-sm mt-2"
+            />
           </Form>
         )}
       </Formik>

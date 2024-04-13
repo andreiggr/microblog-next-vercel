@@ -16,7 +16,7 @@ const PostsListing = ({
   data,
   changePage,
   page,
-  pageSize,
+  pageSize
 }: PostsListingProps) => {
   const router = useRouter();
 
@@ -36,19 +36,34 @@ const PostsListing = ({
 
   return (
     <>
-      <Title>{data?.totalCount} Total Posts</Title>
+      <Title className="text-xl font-semibold text-gray-800 mb-4">
+        {data?.totalCount} Total Posts
+      </Title>
 
       {data?.items?.length > 0 &&
         data?.items.map((post, index) => (
           <PostCard key={index} post={post} visitUserPage={handleUserPage} />
         ))}
-      <Button onClick={() => changePage(page - 1)} disabled={isFirstPage}>
-        Previous
-      </Button>
-      <p>Page: {page + 1}</p>
-      <Button onClick={() => changePage(page + 1)} disabled={isLastPage}>
-        Next
-      </Button>
+
+      <div className="flex justify-between items-center mt-4">
+        <Button
+          onClick={() => changePage(page - 1)}
+          disabled={isFirstPage}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:opacity-50"
+        >
+          Previous
+        </Button>
+
+        <p className="text-sm font-medium">Page: {page + 1}</p>
+
+        <Button
+          onClick={() => changePage(page + 1)}
+          disabled={isLastPage}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:opacity-50"
+        >
+          Next
+        </Button>
+      </div>
     </>
   );
 };

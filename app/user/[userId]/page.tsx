@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { Title } from '@tremor/react';
+import { Card, Title } from '@tremor/react';
 import { useSession } from 'next-auth/react';
 import { CreatePost, PostsListing } from '../../components';
 
@@ -65,19 +65,21 @@ const UserPostsPage = () => {
   }, [userIdFromPath, session, page, pageSize]);
 
   return (
-    <div>
-      <Title>Posts by User: {userIdFromPath}</Title>
-      {isSessionUserPage && <CreatePost session={session} />}
-      {posts ? (
-        <PostsListing
-          data={posts}
-          changePage={setPage}
-          page={page}
-          pageSize={pageSize}
-        />
-      ) : (
-        'No posts yet'
-      )}
+    <div className="p-4 md:p-10 mx-auto max-w-7xl flex-col justify-center">
+      <Card>
+        <Title>Posts by User: {userIdFromPath}</Title>
+        {isSessionUserPage && <CreatePost session={session} />}
+        {posts ? (
+          <PostsListing
+            data={posts}
+            changePage={setPage}
+            page={page}
+            pageSize={pageSize}
+          />
+        ) : (
+          'No posts yet'
+        )}
+      </Card>
     </div>
   );
 };

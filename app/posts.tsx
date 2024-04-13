@@ -12,7 +12,6 @@ const Posts = () => {
   const { data: session } = useSession();
   const router = useRouter();
 
-
   useEffect(() => {
     async function fetchPosts() {
       if (session) {
@@ -45,8 +44,11 @@ const Posts = () => {
   };
 
   return (
-    <div>
-      <Button onClick={() => handleUserPage(session?.user?.id as number)}>
+    <>
+      <Button
+        onClick={() => handleUserPage(session?.user?.id as number)}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+      >
         My posts
       </Button>
 
@@ -56,7 +58,7 @@ const Posts = () => {
         page={page}
         pageSize={pageSize}
       />
-    </div>
+    </>
   );
 };
 

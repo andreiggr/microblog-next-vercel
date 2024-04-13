@@ -1,6 +1,5 @@
 import Main from './main';
 
-
 declare module 'next-auth' {
   interface Session {
     accessToken?: string;
@@ -13,7 +12,7 @@ declare module 'next-auth' {
 
 function IndexPage() {
   return (
-    <main className="p-4 md:p-10 mx-auto max-w-7xl">
+    <main className="p-4 md:p-10 mx-auto max-w-7xl flex-col justify-center">
       <Main />
     </main>
   );

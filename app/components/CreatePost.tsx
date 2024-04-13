@@ -55,10 +55,15 @@ const CreatePost = ({ session }: any) => {
   };
 
   return (
-    <Card>
-      <form onSubmit={handleSubmit}>
+    <Card className="bg-white shadow-lg rounded-lg p-6 my-4">
+      <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="title">Title:</label>
+          <label
+            htmlFor="title"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Title:
+          </label>
           <input
             type="text"
             id="title"
@@ -66,19 +71,30 @@ const CreatePost = ({ session }: any) => {
             value={postData.title}
             onChange={handleChange}
             required
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
           />
         </div>
         <div>
-          <label htmlFor="content">Content:</label>
+          <label
+            htmlFor="content"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Content:
+          </label>
           <textarea
             id="content"
             name="content"
             value={postData.content}
             onChange={handleChange}
             required
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
           />
         </div>
-        <Button type="submit" disabled={isSubmitting}>
+        <Button
+          type="submit"
+          disabled={isSubmitting}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:opacity-50"
+        >
           Create Post
         </Button>
       </form>
