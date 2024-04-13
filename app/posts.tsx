@@ -1,13 +1,17 @@
 'use client';
 import { useSession } from 'next-auth/react';
 import { useState, useEffect } from 'react';
-import { Button, Card, Title } from '@tremor/react';
+import { Button } from '@tremor/react';
+import { useRouter } from 'next/navigation';
+import { PostsListing } from './components';
 
 const Posts = () => {
-  const [posts, setPosts] = useState<any>([]);
-  const [page, setPage] = useState(0); // Pagination state
+  const [posts, setPosts] = useState<any>({});
+  const [page, setPage] = useState(0);
   const pageSize = 10;
   const { data: session } = useSession();
+  const router = useRouter();
+
 
   useEffect(() => {
     async function fetchPosts() {
@@ -25,8 +29,8 @@ const Posts = () => {
         );
 
         if (response.ok) {
-          const data = await response.json();
-          setPosts(data);
+          const res = await response.json();
+          setPosts(res);
         } else {
           console.error('Failed to fetch posts.');
         }
@@ -36,33 +40,22 @@ const Posts = () => {
     fetchPosts();
   }, [page, session]);
 
-  const handleUserPage = (user: string) => {
-    //go to user page to see posts
+  const handleUserPage = (user: number) => {
+    router.push(`/user/${user}`);
   };
 
   return (
     <div>
-      <Title>{posts?.totalCount} Total Posts</Title>
-      <Button onClick={() => handleUserPage(session?.user?.name as string)}>
+      <Button onClick={() => handleUserPage(session?.user?.id as number)}>
         My posts
       </Button>
 
-      {posts?.items?.length > 0 &&
-        posts?.items.map((post: any, index: number) => (
-          <Card key={index}>
-            <Title>{post.title}</Title>
-            <p>{post.content}</p>
-            <Button
-              onClick={() => handleUserPage(post.author.firstName as string)}
-            >
-              Created by: {post.author.firstName} at {post.author.created}
-            </Button>
-          </Card>
-        ))}
-      <Button onClick={() => setPage((prev) => Math.max(0, prev - 1))}>
-        Previous
-      </Button>
-      <Button onClick={() => setPage((prev) => prev + 1)}>Next</Button>
+      <PostsListing
+        data={posts}
+        changePage={setPage}
+        page={page}
+        pageSize={pageSize}
+      />
     </div>
   );
 };

@@ -31,7 +31,7 @@ export const {
             return {
               id: user.id,
               name: `${user.firstName} ${user.lastName}`,
-              email: user.username, 
+              email: user.username,
               accessToken: user.accessToken
             };
           } else {
@@ -61,6 +61,7 @@ export const {
     },
     session: async ({ session, token }: any) => {
       session.accessToken = token.accessToken;
+      session.user.id = token.sub;
       return session;
     },
     redirect: async ({ url, baseUrl }) => {
