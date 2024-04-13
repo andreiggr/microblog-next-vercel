@@ -5,8 +5,9 @@ import Posts from './posts';
 import { useRouter } from 'next/navigation';
 
 const Main = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter();
+  const isLoading = status === 'loading';
 
   const handleLogin = () => {
     signIn();
@@ -15,6 +16,10 @@ const Main = () => {
   const handleRegister = () => {
     router.push('/register');
   };
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
   return (
     <>
       {session ? (
